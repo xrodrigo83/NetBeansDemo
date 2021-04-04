@@ -35,7 +35,7 @@ public abstract class Product {
     private Product other;
 
     Product() {
-        this(0, "no name", BigDecimal.ZERO, Rating.NOT_RATED);
+        this(0, "noName", BigDecimal.ZERO, Rating.NOT_RATED);
     }
 
     Product(int id, String name, BigDecimal price, Rating rating) {
