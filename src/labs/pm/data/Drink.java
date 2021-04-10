@@ -23,7 +23,7 @@ import java.time.LocalTime;
  *
  * @author Rodrigo Rodrigues
  */
-public class Drink extends Product{
+public class Drink extends Product {
 
     Drink(int id, String name, BigDecimal price, Rating rating) {
         super(id, name, price, rating);
@@ -39,7 +39,5 @@ public class Drink extends Product{
     public Product applyRating(Rating newRating) {
         return new Drink(getId(), getName(), getPrice(), newRating);
     }
-    
-    
-    
+
 }

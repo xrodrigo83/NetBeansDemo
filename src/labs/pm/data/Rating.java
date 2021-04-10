@@ -29,15 +29,13 @@ public enum Rating {
     FIVE_STAR("\u2605\u2605\u2605\u2605\u2605");
 
     private final String stars;
-    
-    private Rating(String stars){
+
+    private Rating(String stars) {
         this.stars = stars;
     }
 
     public String getStars() {
         return stars;
     }
-    
-    
 
 }
