@@ -25,48 +25,46 @@ public class Shop {
 
         ProductManager pm = new ProductManager("pt-BR");
 
-        pm.createProduct(101, "Tea", BigDecimal.valueOf(1.99), Rating.NOT_RATED);
+        //pm.printProductReport(42);
+        //pm.createProduct(101, "Tea", BigDecimal.valueOf(1.99), Rating.NOT_RATED);
+        pm.parseProduct("D,101,Tea,1.99,0,2019-09-19");
+        pm.printProductReport(101);
+        pm.parseReview("101,4,Nice cup of Tea");
+        pm.parseReview("101,2,Rather weak tea");
+        pm.parseReview("101,4,Fine tea");
+        pm.parseReview("101,2,Good tea");
+        pm.parseReview("101,5,Perfect tea");
+        pm.parseReview("101,3,Just add some lemon");
 
-        pm.reviewProduct(101, Rating.FOUR_STAR, "Nice cup of Tea");
-        pm.reviewProduct(101, Rating.TWO_STAR, "Rather weak tea");
-        pm.reviewProduct(101, Rating.FOUR_STAR, "Fine tea");
-        pm.reviewProduct(101, Rating.TWO_STAR, "Good tea");
-        pm.reviewProduct(101, Rating.FIVE_STAR, "Perfect tea");
-        pm.reviewProduct(101, Rating.THREE_STAR, "Just add some lemon");
+        //pm.createProduct(102, "Coffee", BigDecimal.valueOf(3.99), Rating.NOT_RATED);
+        pm.parseProduct("D,102,Coffee,3.99,0,2019-09-19");
+        pm.parseReview("102,4,Nice cup of coffee");
+        pm.parseReview("102,2,Rather weak coffee");
+        pm.parseReview("102,4,Fine coffee");
+        pm.parseReview("102,2,Good coffee");
+        pm.parseReview("102,5,Perfect coffee");
+        pm.parseReview("102,3,Just add some sugar");
 
-        pm.createProduct(102, "Coffee", BigDecimal.valueOf(3.99), Rating.NOT_RATED);
-        pm.reviewProduct(102, Rating.TWO_STAR, "Nice cup of Coffee");
-        pm.reviewProduct(102, Rating.TWO_STAR, "Rather weak Coffee");
-        pm.reviewProduct(102, Rating.TWO_STAR, "Fine Coffee");
-        pm.reviewProduct(102, Rating.THREE_STAR, "Good Coffee");
-        pm.reviewProduct(102, Rating.FIVE_STAR, "Perfect Coffee");
-        pm.reviewProduct(102, Rating.TWO_STAR, "Just add some lemon");
-
-        pm.createProduct(103, "Cake", BigDecimal.valueOf(7.99), Rating.NOT_RATED, LocalDate.now().plusDays(5));
-        pm.reviewProduct(103, Rating.TWO_STAR, "Nice cup of Cake");
-        pm.reviewProduct(103, Rating.FIVE_STAR, "Rather weak Cookie");
-        pm.reviewProduct(103, Rating.FIVE_STAR, "Fine Cake");
-        pm.reviewProduct(103, Rating.FIVE_STAR, "Good Cake");
-        pm.reviewProduct(103, Rating.FIVE_STAR, "Perfect Cake");
-        pm.reviewProduct(103, Rating.TWO_STAR, "Just add some extra sugar");
+        //pm.createProduct(103, "Cake", BigDecimal.valueOf(7.99), Rating.NOT_RATED, LocalDate.now().plusDays(5));
+        pm.parseProduct("F,103,Cake,7.99,0,2021-04-15");
+        pm.parseReview("103,2,Nice cup of Cake");
+        pm.parseReview("103,5,Rather weak Cookie");
+        pm.parseReview("103,5,Fine Cake");
+        pm.parseReview("103,5,Good Cake");
+        pm.parseReview("103,5,Perfect Cake");
+        pm.parseReview("103,2,Just add some extra sugar");
 
         Comparator<Product> ratingSorter = (p1, p2) -> p2.getRating().ordinal() - p1.getRating().ordinal();
         Comparator<Product> priceSorter = (p1, p2) -> p2.getPrice().compareTo(p1.getPrice());
         System.out.println('\n');
         System.out.println("Produtos ordernados pelas avaliações, da maior para a menor");
-        pm.printProducts(ratingSorter);
+        pm.printProductReport(101);
+        pm.printProductReport(102);
+        pm.printProductReport(103);
+        pm.printProducts(p -> p.getPrice().floatValue() < 2, ratingSorter);
 
-        System.out.println('\n');
-        System.out.println("Produtos ordernados pelo preço, do maior para o menor");
-        pm.printProducts(priceSorter);
-        
-        System.out.println('\n');
-        System.out.println("Produtos ordernados pelas avaliações e preço, dos maiores para os menores");
-        pm.printProducts(ratingSorter.thenComparing(priceSorter));
-        
-        System.out.println('\n');
-        System.out.println("Produtos ordernados pelas avaliações e preço, dos menores para os maiores");
-        pm.printProducts(ratingSorter.thenComparing(priceSorter).reversed());
+        pm.getDiscounts().forEach((rating, discount) -> System.out.println(rating + '\t' + discount));
+
     }
 
 }
